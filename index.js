@@ -8,16 +8,24 @@ client.once('ready', () => {
 })
 
 client.on('message', (msg) => {
+    let member = msg.mentions.members.first();
+    if(msg.content.startsWith(`${prefix}riseup`) && member){
 
-    if(msg.content.startsWith(`${prefix}riseup`) && msg.mentions.members.first()){
-
-        let member = msg.mentions.members.first();
-        console.log(member)
-        for(i=0; i < 5; i++){
-        msg.channel.send(`Rise Up ${member}! :dobelikethat:`)
+        for(i=0; i < 100; i++){
+        msg.channel.send(`Get on, ${member}`)   
         }
-    }
 
+    }
+})
+
+client.on('message', (msg) => {
+    if(msg.content.startsWith(`${prefix}clear`)){
+        msg.channel.fetchMessages()
+        .then((list) =>{
+            msg.channel.bulkDelete(list)
+        })
+        msg.channel.send('Chat cleared')
+    }
 })
 
 
